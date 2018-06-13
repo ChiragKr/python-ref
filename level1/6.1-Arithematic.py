@@ -14,9 +14,18 @@ print(x) #--> 3.75
 x = 15//4 # integer division
 print(x) #--> 3
 
+x = 21 % 4
+print(x) #--> 3
+
 x = 4**3
 print(x) #--> 64
 x = pow(4, 3)
 print(x) #--> 64
 
 # chaining arithmetic operators
+
+#evaluated via BODMAS
+x = 2 + 10 * 10 + 3
+print(x) #--> 105
+x = (2+10) * (10+3)
+print(x) #--> 156

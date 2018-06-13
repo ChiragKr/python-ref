@@ -1,0 +1,4 @@
+writing some stuff to my 
+new file, fileWriteDemo1.txt.
+THIS LINE WAS APPENDED TO fileWriteDemo1.txt 
+by using the append mode of file writing
