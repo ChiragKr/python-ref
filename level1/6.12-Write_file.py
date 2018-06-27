@@ -5,6 +5,7 @@ __author__ = 'Chirag'
 
 # in 'w' mode file is over written
 myfile = open("fileWriteDemo1.txt", 'w')
+print(f"type(myfile) = {type(myfile)}")
 myfile.write("writing some stuff to my new file, \n")
 myfile.write("fileWriteDemo1.txt via script 6.12-Write_file.py")
 myfile.close()

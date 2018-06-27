@@ -1,4 +1,4 @@
-writing some stuff to my 
-new file, fileWriteDemo1.txt.
+writing some stuff to my new file, 
+fileWriteDemo1.txt via script 6.12-Write_file.py
 THIS LINE WAS APPENDED TO fileWriteDemo1.txt 
 by using the append mode of file writing

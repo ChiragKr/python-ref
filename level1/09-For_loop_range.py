@@ -1,6 +1,6 @@
 __author__ = 'chira'
 
-#range(a,stop,d) = [a, a+d, a+2d, a+3d,..., a+nd] such that a+nd < stop (strictly less than)
+# range(a,stop,d) = [a, a+d, a+2d, a+3d,..., a+nd] such that a+nd < stop (strictly less than)
 
 for x in range(10):       # x iteratively takes on values form [0,1,...,8,9] array in sequential order
     print(x)
