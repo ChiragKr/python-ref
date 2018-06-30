@@ -41,3 +41,23 @@ print(brr * 2)    # Prints list two times
 print(arr + brr)  # Prints concatenated list
 print("\n")
 #=====================================================================
+# ALIASING
+warm = ["red", "yellow", "orange"]
+hot = warm  # hot and warm both point to same memory location
+print(f"hot = {hot}")
+print(f"warm = {warm}")
+hot.append("pink")
+print(f"hot = {hot}")  # 'hot' is an ALIAS for 'warm'
+print(f"warm = {warm}")
+print()
+#=====================================================================
+# CLONING
+warm = ["red", "yellow", "orange"]
+hot = warm[:]  # new memory assigned to 'hot'
+print(f"hot = {hot}")
+print(f"warm = {warm}")
+hot.append("pink")
+print(f"hot = {hot}")  # 'hot' is an CLONE for 'warm'
+print(f"warm = {warm}")
+print()
+#=====================================================================

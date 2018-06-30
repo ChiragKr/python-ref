@@ -4,6 +4,9 @@ y = ["Tom", 2.71, 36, 36] # is a list. MUTABLE
 z = ("Tom", 2.71, 36, 36) # tuple is IMMUTABLE
 #==============================================
 # CREATING tuples (only declaring method!)
+t = ()
+t = t + ("Lara",) + (12,)  # can add but not change
+print(f"t = {t} \n")
 t = ("Lara", True, 25, 3.145, True)
 print(f"t = {t} \n")
 #==============================================
