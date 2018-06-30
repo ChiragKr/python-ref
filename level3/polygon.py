@@ -3,7 +3,8 @@ __author__ = 'Chirag'
 import math
 import matplotlib.pyplot as plt
 
-class Polygon():
+
+class Polygon(object):
 	def __init__(self,side_length, num_of_sides):
 		self.num_of_sides = num_of_sides
 		self.side_length = side_length
@@ -15,6 +16,7 @@ class Polygon():
 
 	def get_perimeter(self):
 		return self.num_of_sides*self.side_length
+
 
 P = Polygon(42,5)
 area = P.get_area()
