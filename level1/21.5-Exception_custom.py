@@ -12,6 +12,8 @@ raise Exception_object
 except Exception_object as e
 """
 
+"""code exemplifies: custom error type and custom raise"""
+
 
 class NegativeAge(Exception):  # creating custom exception
 	def __init__(self, age):
