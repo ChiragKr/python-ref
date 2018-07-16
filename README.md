@@ -66,28 +66,31 @@ code = lots of expressions/"blocks of code"/functions make code
 functions : (encapsulation. abstraction. decomposition. modularity. re-useibility)
 			block(s) of code make a function body.
 
-block of code : statements make a block of code (iterative block and/or decision 					block, fuction block etc.)
+block of code : statements make a block of code (iterative block and/or decision 
+block, fuction block etc.)
 
 [Statements DO something. Expressions REPRESENT value.]
 [D0 something based on some VALUE]
 
 statements  : control-flow (if-statement/for & while statment/return) uses keywords
-			  and the value(s) of certain expression(s).
-expressions : putting primitives/variables together using operators in syntactically 			   and semantically valid ways. [expressions are evaluated]
-			  expressions can also involve "custom operators" aka functions/methods 
+and the value(s) of certain expression(s).
+expressions : putting primitives/variables together using operators in syntactically
+and semantically valid ways. [expressions are evaluated]
+expressions can also involve "custom operators" aka functions/methods 
 
 
 "custom operator" : aka functions (a level of abstraction)
 operators = arithematic, comparision, logical, assignment, (operator overloading)
 
 variables/binding : give names to primitives (a level in abstraction)
-[more general term for 'variable' is 'identifier'...used for any name given to different parts of a program (class name, function name, var name etc.)]
+[more general term for 'variable' is 'identifier'...used for any name given to 
+different parts of a program (class name, function name, var name etc.)]
 
 "data-structure"/compound data objects : list, tuple, set dictionary, objects
 non-scalar : string, list, tuple, set dictionary, objects
 scalar     : int, float, bool, NoneType, 
 Data Objects : scalar vs non-scalar, mutable vs immutable
-			   sequential vs mapping.
+sequential vs mapping.
 
 ===================================================================
 
@@ -186,14 +189,79 @@ and make clear the assumptions you have made.
 > use intuition regarding natural BOUNDARY of the problem 
 > random testing sample and checking outcomes
 > BLACK BOX testing : Don't look at code. just the docstring 
-(BOUNDARY and EXTREME inputs)
+  (BOUNDARY and EXTREME inputs)
 > GLASS BOX testing : Look inside code. every potential path tested
-(BRANCHES, LOOPS within code)
+  (BRANCHES, LOOPS within code)
+
+Types of Testing Suite :
+
+> Testing of 2 type: Black Box Testing and Glass Box Testing
+in a Black Box Testing Suite we add all extreme cases of inputs to a function
+in a Glass Box Testing Suite we add all possible paths within a function
+(all if-elif-else, a loop runs 0,1 and multiple times.) 
+
+-----------------------------------------------------------------
+
+Types of Bugs in code :
+
+> Bugs are of two type:
+(a) Overt Bugs  : obvious manifestation - code crashes or runs forever
+(b) Covert Bugs : no obvioius manifestation - code returns a value which
+is incorrect but hard to determine
+
+(a) Persistant   : occur everytime code is run (easy to detect)
+(b) Intermittent : occur sometimes (even with same input). Depend on other factors
+(dealing with the internet or with time etc.)
+
+Defensive programming can help force bugs into the "overt persistant" class
+of bugs which are easy to detect and correct.
 
 --------------------------------------------------------------------
 
-Exception and Assertions
+Debugging : 
 
+> Read error message as it gives info about the type of error and the 
+exact line of code where the error occured.
+> Use "print" statements to narrow down on the location of the bug
+> print when you enter a function defination. print the inputs. print before returning.
+print half-way. Put print statements in other obvious places.
+> IndexError, TypeError, NameError, SyntaxError.
+> Logic Errors (Semantic Error) harder. Explain code (rubber duck method)
+> Don't write entire code at once. Write module then test/debug. Write another 
+module then test/debug it. then test the two modules together
+
+====================================================================
+
+Exception and Assertions :
+
+Exception : 
+
+> Exceptions deal with the question - "What happens when a procedure
+execution hits an "unexpected" condition?"
+
+> Possible "unexpected condition" : IndexError, TypeError, NameError, SyntaxError,
+AttributeError, ValueError, IOError.
+
+> In regular code, Python will terminate code and display one of the above errortype
+and a message giving details about the error
+
+> The possible things that we can do when a program encounters an error
+(a) Fail silently (BAD IDEA!)
+(b) return an "error" value 
+(c) stop execution. raise an error. 
+Python raises some expections by default, however we can manually raise exceptions as well
+> Pyhton code provides for error handlers for exceptions by the 
+  "try-except-else-finally" blocks.        
+
+--------------------------------------------------------------------
+
+Assertions : 
+> Using the keyword 'assert' we can ensure that a certain condition is met
+  before we carry forward with code excution. If this condition is not met, an AssertionError
+  is raised by python and the code does not execute further (we can however write the 'assert'
+  within a try-block and write an except block for AssertionError)
+> Assertions are usually used for inputs to a function and before returning output 
+ 
 ====================================================================
 
 Object Oriented Programming
@@ -232,12 +300,83 @@ provided values within that instance of the class (simply, object)
 > to access these we say 'goto frame c and pick x value in that frame' = c.x
 > to access method of a class there are 2 ways : 
 (a) Use an instance to get to the method (self automatically refers to the
-    calling object) c.distance(origin)
+calling object) c.distance(origin)
 (b) Use class to get to the method : provide all arguments manually. 
-    Coordinate.distance(c, origin)
+Coordinate.distance(c, origin)
 
 > object is a frame. class is a frame. object does not have method defined
   inside. but since it is an instance of the class it INHERITS methods from
   the class 
 
-> isinstance(object, class) checkes if given object is instance of the given class
+> isinstance(object, class) checkes if given object is instance of the given
+
+=======================================================================
+
+> getter and setter function used to access and change object vaules 
+rather than direct referencing. use "obj.getX()" rather than "obj.x"
+use "obj.setX(5)" rather than "obj.x = 5"
+> Bad practice to directly manipulate internal representation of an object
+> We should seperate use of the object from what is inside
+
+=======================================================================
+
+Inheritance subclasses and superclasses
+> Inheritance helps us reuse previous code (written for the superclass
+  object) while adding additional attribute (data as well as procedural)
+  to the subclass.
+
+> While subclass can inherit attributes from the parent class, we can 
+  always  override the parent class methods by redefining the same 
+  method in the subclass
+
+> Inheritance furthers the idea of code modularity since making changes
+  to the superclass automatically infulences the subclass. But not vice
+  versa. Therefore the Hierarchy should be made carefully
+
+> Substitution Principle to improve the Hierarchy. 
+
+> We can create a class with objects of other classes as its attributes
+
+=======================================================================
+
+Generators
+> Generators allow us to generate as we go along, instead of holding 
+  everything in  memory.
+
+> Generator functions allow us to write a function that can send back a 
+  value and then later resume to pick up where it left off.
+
+> Generator functions will automatically suspend and resume their execution 
+  and state around the last point of value generation. This feature is known as state suspension.
+
+> The keyword 'yield' makes all this possible. Other important functions
+  are 'next()' and 'iter()'
+
+> 'yield' - suspends execution, next() - resumes execution
+
+  =======================================================================
+
+Computational Complexity (algorithm vs algorithm in terms of speed and memory)
+> "Readability" = names/identifiers should be discriptive
+> "Modularity" = Functions, Classes and Inheritance
+> "Scalability" = Complexity of algorithm. Tradeoff between time and space
+> Focus on Time Complexity. "How program 'scales' when input size grows?"
+> Many ways to implement (recursive vs iterative) but only few algorithms
+> Possible ways to compute (time) efficiency of algorithm:
+
+(a) Time run-time : varies with implementation, vaires between computers, not 
+predictable base on small inputs. 
+
+(b) Count Operations : assumes primitive operations (+, >, =) take constant time
+now counting operations effectively is counting time. Varies with implementaion!
+no idea which operation to count. Depend on input (which we want)
+
+(c) Order of Growth : Decide input and how to measure its 'size'. BEST, WORST, AVERAGE. 
+Worst- case most important. How the efficieny changes based on the size of input. 
+Eg how will efficiency change if input doubles.
+ 
+> For this we identify the slowest parts of the program and put an upper bound on the 
+time and then this helps us classify the algorithm in different orders of growth.
+constant, linear, quadratic, logarithmic, n log n, exponentail
+
+ =========================================================================
