@@ -318,83 +318,248 @@ Compound Datatype Dictionary
 * global variable (not recommened) breaks normal scoping rule
   used to show increase in efficiency by memoization
 
-====================================================================
-
 Debugging and Testing Code
-> Analogy.."making soup and bugs keep falling in from the ceiling"
-> Cheak soup for bugs (TESTING/compare inputs and outputs)
-> Keep lid closed (DEFENSIVE PROGRAMMING)
-> Clean Kitchen (ELIMINATE SOURCE OF BUG - DEBUGGING)
---------------------------------------------------------------------
+==========================
+
+Analogy :
+> "making soup and bugs keep falling in from the ceiling"
+* Cheak soup for bugs (**TESTING**/compare inputs and outputs)
+* Keep lid closed (**DEFENSIVE PROGRAMMING**)
+* Clean Kitchen (ELIMINATE SOURCE OF BUG - **DEBUGGING**)
 
 Defensive Programming: 
-(a) write docstring and comments ,
-(b) modularize program, 
-(c) check conditions on input/output (ASSERTIONS)
+----------------------
+(a) write *docstring* and *comments*,
+(b) *modularize* program, 
+(c) check conditions on *input/output* (**ASSERTIONS**)
 
---------------------------------------------------------------------
-
-Testing : compare inputs and outputs make sure to write docstring
+Testing
+-------
+Compare inputs and outputs make sure to write docstring
 and make clear the assumptions you have made.
 (a) Unit Testing : validate each piece of the program. 
     Test each function seperatedly.
 (b) Regression testing : (unit) test again after fixing a bug 
 (c) Integration testing : test overall program (after unit testing)
-> use intuition regarding natural BOUNDARY of the problem 
-> random testing sample and checking outcomes
-> BLACK BOX testing : Don't look at code. just the docstring 
-(BOUNDARY and EXTREME inputs)
-> GLASS BOX testing : Look inside code. every potential path tested
-(BRANCHES, LOOPS within code)
+* use intuition regarding natural BOUNDARY of the problem 
+random testing sample and checking outcomes
 
---------------------------------------------------------------------
+* Types of Testing Suite :
+    * **BLACK BOX testing** : Don't look at code. just the docstring 
+    (BOUNDARY and EXTREME inputs)
+    * **GLASS BOX testing** : Look inside code. every potential path tested
+    (BRANCHES, LOOPS within code)
 
-Exception and Assertions
+Black Box Testing and Glass Box Testing in a Black Box Testing Suite 
+we add all extreme cases of inputs to a function
+in a Glass Box Testing Suite we add all possible paths within a function
+(all if-elif-else, a loop runs 0,1 and multiple times.) 
 
-====================================================================
+* Types of Bugs in code :
 
+    Based on how they show up :
+    (a) Overt Bugs  : obvious manifestation - code crashes or runs forever
+    (b) Covert Bugs : no obvioius manifestation - code returns a value which
+    is incorrect but hard to determine
+    
+    Based on when they appear : 
+    (a) Persistant   : occur everytime code is run (easy to detect)
+    (b) Intermittent : occur sometimes (even with same input). Depend on other factors
+    (dealing with the internet or with time etc.)
+
+Defensive programming can help force bugs into the "overt persistant" class
+of bugs which are easy to detect and correct.
+
+Debugging
+---------
+
+* Read error message as it gives info about the type of error and the 
+exact line of code where the error occured (and the call stack).
+* Use "print" statements to narrow down on the location of the bug
+* print when you enter a function defination. print the inputs. print before returning.
+print half-way. Put print statements in other obvious places.
+* IndexError, TypeError, NameError, SyntaxError.
+* Logic Errors (Semantic Error) harder. Explain code (rubber duck method)
+* Don't write entire code at once. Write module then test/debug. Write another 
+module then test/debug it. then test the two modules together (unit testing,
+regression testing and finally integration testing)
+
+
+Exception and Assertions 
+========================
+
+Exception
+---------
+
+* Exceptions deal with the question :
+>"What happens when a procedure execution hits an "unexpected" condition?"
+
+* Possible "unexpected condition" : IndexError, TypeError, NameError, SyntaxError,
+AttributeError, ValueError, IOError.
+* In "regular code", Python will terminate code and display one of the above errortype
+and a message giving details about the error (and the call stack that lead to that error).
+* The possible things that we can do when a program encounters an error
+    (a) Fail silently (BAD IDEA!)
+    (b) return an "error" value 
+    (c) stop execution. raise an error. 
+Python raises some expections by default, **however we can manually raise exceptions as well**
+* Pyhton code provides for error handlers for exceptions by the 
+  **"try-except-else-finally" blocks**.        
+
+Assertions 
+----------
+
+* Using the keyword **'assert'** we can ensure that a certain condition is met
+before we carry forward with code excution. If this condition is not met, an AssertionError
+is raised by python and the code does not execute further (we can however write the 'assert'
+within a try-block and write an except block for AssertionError)
+* Assertions are usually used for inputs to a function and before returning output 
+ 
 Object Oriented Programming
-> Everything in Python is an object. Primitive datatype, functions etc.
-  are all objects.
-> Eg. grades = [A, B, C, D, F]. 'grades' is an object of class 'list' with
-  attributes (linked list nodes) and methods 'append()', 'pop()' etc.
-> Every object has 3 things 
-(a) Type (b) Internal Representation (c) Set of Procedures/Interface
+===========================
 
-> Creating 'custom datatypes' and associated 'custom operators'
-> Custom datatype = 'internal representation' = 'data attributes' = 'data abstraction'
-  Custom operator = 'set of procedures' = 'procedural attributes'/'methods' = 'encapsulating procedures'
-> 'object' wraps these two ideas (abstraction and encapsulation) together.
-> each object belongs to a 'class' or 'type' where these attributes and methods are
-  defined. object is an instance of a class.
-> CREATING a class (using 'class' keyword) and 
-  CREATING an object (using classname and __init__() method)and 
-  USING this instance (using the '.' operator and 'self' keyword)
-> WHY do OOP? 
+* *Everything in Python is an object. Primitive datatype, functions etc. are all objects.*
+Eg. grades = \[A, B, C, D, F\]. 'grades' is an object of the class 'list' with attributes 
+(linked list nodes) and methods 'append()', 'pop()' etc.
+* Every object has 3 things 
+    (a) Type (or class)
+    (b) Internal Representation 
+    (c) Set of Procedures/Interface
+
+* Creating **'custom datatypes'** and associated **'custom operators'**
+* Custom datatype = 'internal representation' = 'data attributes' = 'data abstraction'
+* Custom operator = 'set of procedures' = 'procedural attributes'/'methods' = 'encapsulating procedures'
+* 'Object' wraps these two ideas (abstraction and encapsulation) together.
+* Each object belongs to a 'class' or 'type' where these attributes and methods are 
+defined. Object is an instance of a class.
+
+* We can create a class by using **'class' keyword**
+* We can create an object by calling the class as a function which
+inturn calls the **__init__() method** defined inside the class 
+* We refer to the attributes of any instance using the **'.' operator**
+* We refer to the calling object using the **'self' keyword**
+Example :
+```pyhton
+class Phone(object):
+    def __init__(self, screen, ram, memory):
+        self.screen = screen
+        self.ram = ram
+        self.memory = memory
+        self.is_on = False
+        
+    def toggle_on_off(self)
+        if self.is_on == False
+            print("Powering on your smart-phone")
+            self.is_on = True
+        else
+            print("Powering off your smart-phone")
+            self.is_on = False
+```
+
+* WHY do OOP? 
 bundle data into packages (logical organization of data) and 
 divide-and-conquer development (class help with code modularity)
 
-====================================================================
+Creating an Object
+==================
+* When we call the class, the __init__() method creates a new instance
+```python
+oneplus = Phone(6.28, 6, 64)
+```
+* first parameter of 'init' (self) refers to an instance of the class
+* other parameter is the initial data that the object is going to 'glue' together
+* gluing done by creating bindings with the instance 'self'. (self.x = x)
+* once binding is complete we have **instance variables** that are initialized with 
+the provided values within that instance of the class (simply, object)
 
-Creating an object
-> when we call the class, the __init__() method creates a new instance 
-> first parameter of 'init' (self) refers to an instance of the class
-other parameter is the initial data that the object is going to 'glue' together
-> gluing done by creating bindings with the instance 'self'. (self.x = x)
-> once binding is complete we have 'instance variables' are initialized with the 
-provided values within that instance of the class (simply, object)
-> we can access these instance variables of an object using the dot operator
-> Think of object pointing to a frame (just like function calls creates a frame)
-> Within this scope/frame we bind values to data attibutes (instance variables)
-> to access these we say 'goto frame c and pick x value in that frame' = c.x
-> to access method of a class there are 2 ways : 
-(a) Use an instance to get to the method (self automatically refers to the
+Assessing Object Attributes
+===========================
+Data Attributes
+---------------
+* we can access these instance variables of an object using the dot operator
+```python
+print(f"oneplus 6 screen size is {oneplus.screen}-inches")
+```
+* Think of object pointing to a frame (just like function calls creates a frame)
+* Within this scope/frame we bind values to data attibutes (instance variables)
+* To access these data attributes we say 
+'goto frame `oneplus` and pick `screen` value in that' 
+which when translating to code becomes `oneplus.screen`
+
+Procedural Attributes
+---------------------
+* to access method of a class there are 2 ways : 
+    (a) Use an instance to get to the method (self automatically refers to the
     calling object) c.distance(origin)
-(b) Use class to get to the method : provide all arguments manually. 
+    (b) Use class to get to the method : provide all arguments manually. 
     Coordinate.distance(c, origin)
 
-> object is a frame. class is a frame. object does not have method defined
-  inside. but since it is an instance of the class it INHERITS methods from
-  the class 
+* object is a frame. class is a frame. object does not have method defined
+inside. but since it is an instance of the class it **INHERITS** methods from
+the class 
+* isinstance(object, class) checkes if given object is instance of the given class
 
-> isinstance(object, class) checkes if given object is instance of the given class
+Getter and setter functions
+===========================
+
+* getter and setter function should be used to access and change object vaules 
+rather than direct referencing. use "obj.getX()" rather than "obj.x"
+use "obj.setX(5)" rather than "obj.x = 5"
+* Bad practice to directly manipulate internal representation of an object
+* We should seperate use of the object from what is inside
+
+Inheritance subclasses and superclasses
+=======================================
+
+* Inheritance helps us reuse previous code (written for the superclass
+object) while adding additional attribute (data as well as procedural)
+to the subclass.
+* While subclass can inherit attributes from the parent class, we can 
+always  override the parent class methods by redefining the same 
+method in the subclass
+* Inheritance furthers the idea of code modularity since making changes
+to the superclass automatically infulences the subclass. But not vice
+versa. Therefore the Hierarchy should be made carefully
+* **Substitution Principle** to improve the Hierarchy. 
+* We can create a class with objects of other classes as its attributes
+
+Generators
+==========
+* Generators allow us to generate as we go along, instead of holding everything in  memory.
+
+* Generator functions allow us to write a function that can send back a 
+value and then later resume to pick up where it left off.
+
+* Generator functions will automatically suspend and resume their execution 
+and state around the last point of value generation. This feature is known as state suspension.
+
+* The keyword 'yield' makes all this possible. Other important functions
+  are 'next()' and 'iter()'
+
+* 'yield' - suspends execution, next() - resumes execution
+
+Computational Complexity (algorithm vs algorithm in terms of speed and memory)
+==============================================================================
+
+* **"Readability"** = names/identifiers should be discriptive
+* **"Modularity"** = Functions, Classes and Inheritance
+* **"Scalability"** = Complexity of algorithm. Tradeoff between time and space
+
+* Focus on Time Complexity. "How program 'scales' when input size grows?"
+* Many ways to implement (recursive vs iterative) but only few algorithms
+* Possible ways to compute (time) efficiency of algorithm:
+
+(a) Time in milliseconds : varies with implementation, vaires between computers, not 
+predictable base on small inputs. 
+
+(b) Count Operations : assumes primitive operations (+, >, =) take constant time
+now counting operations effectively is counting time. Varies with implementaion!
+no idea which operation to count. Depend on input (which we want)
+
+(c) Order of Growth : Decide input and how to measure its 'size'. BEST, WORST, AVERAGE. 
+Worst- case most important. How the efficieny changes based on the size of input. 
+Eg how will efficiency change if input doubles.
+ 
+* For this we identify the slowest parts of the program and put an upper bound on the 
+time and then this helps us classify the algorithm in different orders of growth.
+constant, linear, quadratic, logarithmic, n log n, exponentail.
